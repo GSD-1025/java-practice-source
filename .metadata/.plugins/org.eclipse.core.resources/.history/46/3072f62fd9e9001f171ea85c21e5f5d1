@@ -1,0 +1,163 @@
+
+import java.util.Random;
+import java.util.Scanner;
+public class test {
+	static String[] wordSave=new String[5];
+	public static void main(String[] args) {
+		Scanner in=new Scanner(System.in);
+		for(int i=0; i<1;) {
+			System.out.println("단어 저장 - 1 \n단어 보기 - 2 \n검색 하기 - 3 \n단어 삭제 - 4 \n단어 수정 -5 \n종료 - 그외");
+			int a=in.nextInt();
+			in.nextLine();
+			if(a==1) {
+				saveWord();
+			}else if(a==2) {
+				wordAll();
+			}else if(a==3) {
+				wordSearch();
+			}else if(a==4) {
+				wordDel();
+			}else if(a==5) {
+				wordRevise();
+			}else {
+				break;
+			}
+		}
+	}
+	public static void saveWord() {
+		Scanner in=new Scanner(System.in);
+		System.out.println("전체 초기화 - 1 \n초기화 안함 - 그외");
+		int h=in.nextInt();
+		in.nextLine();
+		if(h==1) {
+			for(int i=0; i<5; i++) {
+				wordSave[i]=null;
+			}
+		}
+		
+		System.out.println("자동 입력 - 1 \n수동입력 - 2 \n종료 - 그외의 숫자");
+		int a=in.nextInt();
+		in.nextLine();
+		if(a==1) {
+			wordAuto();
+		}else if(a==2) {
+			wordHand();
+			wordAuto();
+		}
+	}
+	public static void wordHand() {
+		Scanner in=new Scanner(System.in);
+		for(int i=0; i<5; i++) {
+			if(wordSave[i]==null) {
+				String a=in.nextLine();
+				if(doverLap(a)!=-10) {
+					System.out.println("중복 입력. \n다시 입력하세요.");
+					i--;
+				}else if(wordEnglish(a)){
+					System.out.println("영어가 아닙니다. \n다시 입력하세요.");
+					i--;
+				}else {
+					wordSave[i]=a;
+				}
+			}	
+		
+		}
+	}
+	public static void wordAuto() {
+		Random r=new Random();
+		String[] wordSaveAuto= {"ubiquitous","exacerbate","ambivalent","capricious","benevolent","innocuous","ostentatious","tenacious","acquiesce","alleviate","conciliate","dichotomy","ephemeral","hierarchy","mitigation","obfuscate","paradoxical","prognosis","quixotic","recalcitrant"};;
+		for(int i=0; i<5; i++) {
+			if(wordSave[i]==null) {
+				String a=wordSaveAuto[r.nextInt(20)];
+				if(doverLap(a)==-10) {
+					wordSave[i]=a;
+				}else {
+					i--;
+				}
+				
+			}
+		}
+	}
+	public static int doverLap(String a) {
+		for(int i=0; i<5; i++) {
+			if(a.equals(wordSave[i])) {
+				return i;
+			}
+		}
+		return -10;
+	}
+	public static boolean wordEnglish(String a) {
+		for(int i=0; i<a.length(); i++) {
+			if((65>a.charAt(i)||a.charAt(i)>90)&&(97>a.charAt(i)||a.charAt(i)>122)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	public static void wordAll() {
+		for(int i=0; i<5; i++) {
+			System.out.print(wordSave[i]+"	");
+		}
+		System.out.println();
+	}
+	public static void wordSearch() {
+		Scanner in=new Scanner(System.in);
+		for(int i=0; i<1;) {
+			System.out.println("정확히 일치 시 검색을 원하면 1번. \n포함된 단어를 찾으면 2번. \n원하시 않으면 그 외의 숫자를 입력하세요.");
+			int b=in.nextInt();
+			in.nextLine();
+			if(b==1) {
+				String a=in.nextLine();
+				if(doverLap(a)!=-10) {
+					System.out.println("검색 결과\n"+wordSave[doverLap(a)]);
+				}else {
+					System.out.println("검색 결과가 없습니다.");
+				}
+			}else if(b==2){
+				wordSearchPu();
+			}else {
+				break;
+			}
+		}
+	}
+	public static void wordDel() {
+		Scanner in=new Scanner(System.in);
+		String a=in.nextLine();
+		if(doverLap(a)!=-10) {
+			wordSave[doverLap(a)]=null;
+			System.out.println("삭제 성공.");
+		}else {
+			System.out.println("삭제 실패.");
+		}
+	}
+	public static void wordRevise() {
+		Scanner in=new Scanner(System.in);
+		String a=in.nextLine();
+		if(doverLap(a)!=-10) {
+			for(int i=0; i<1; i++) {
+				String b=in.nextLine();
+				if(doverLap(b)!=-10) {
+					System.out.println("중복 입력. \n다시 입력하세요.");
+					i--;
+				}else if(wordEnglish(a)){
+					System.out.println("영어가 아닙니다. \n다시 입력하세요.");
+					i--;
+				}else {
+					wordSave[doverLap(a)]=b;
+					System.out.println("변경 성공.");
+				}
+			}
+		}else {
+			System.out.println("변경 실패.");
+		}
+	}
+	public static void wordSearchPu() {
+		Scanner in=new Scanner(System.in);
+		String a=in.nextLine();
+		if(doverLap(a)!=-10) {
+			System.out.println("검색 결과\n"+wordSave[doverLap(a)]);
+		}else {
+			System.out.println("검색 결과가 없습니다.");
+		}
+	}
+}

@@ -1,0 +1,21 @@
+import java.util.ArrayList;
+
+public class practice { 	
+	public static void main(String[] args){ 		
+	
+		for(int i=0; i<4;i++) {
+			for(int j=0; j<9; j++) {
+				if(i==0) {
+				   map[11][10-j][i]=mapl1[j];
+				}else if(i==1) {
+				  map[11][10-j][i]=String.valueOf(20);
+				}else if(i==2) {
+				  map[11][10-j][i]=" ";
+				}else if(i==3) {
+				  map[11][10-j][i]=" ";
+				}
+			}
+		}
+		 
+	} 
+}

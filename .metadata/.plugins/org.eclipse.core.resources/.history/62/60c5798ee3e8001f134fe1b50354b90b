@@ -1,0 +1,26 @@
+package main;
+
+import java.util.Random;
+
+public class Ex {
+	static int[] lottoNum= new int[6];
+	public static void main(String[] args) {
+		System.out.println("프로그램 시작");
+		prtLotto();
+		randomInt();
+		prtLotto();
+	}
+	public static void randomInt() {
+		Random r= new Random();
+		for(int i=0; i<lottoNum.length; i++) {
+			lottoNum[i]=r.nextInt(45)+1;
+		}
+	}
+	public static void prtLotto() {
+		for(int i=0; i<lottoNum.length; i++) {
+			System.out.print(lottoNum[i]);
+		}
+		System.out.println();
+	}
+
+}

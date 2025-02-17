@@ -1,0 +1,21 @@
+
+public class test02 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int point=30;
+		if (point>=90) {
+		   System.out.print('A');
+		}else if (point<90 && point>=80) {
+		   System.out.print('B');
+		}else if (point<80 && point>=70) {
+		   System.out.print('C');
+		}else if (point<70 && point>=60) {
+		   System.out.print('D');
+		}else {
+	       System.out.print('F');
+		}
+
+	}
+
+}

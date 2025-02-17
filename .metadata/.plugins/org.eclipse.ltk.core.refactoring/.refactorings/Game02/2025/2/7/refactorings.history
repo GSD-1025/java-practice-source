@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename package &apos;ocelo&apos; to &apos;buru&apos;&#x0D;&#x0A;- Original project: &apos;Game02&apos;&#x0D;&#x0A;- Original element: &apos;Game02/src/ocelo&apos;&#x0D;&#x0A;- Renamed element: &apos;Game02/src/buru&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename package &apos;ocelo&apos;" flags="589830" hierarchical="false" id="org.eclipse.jdt.ui.rename.package" input="/src&lt;ocelo" name="buru" qualified="false" references="true" stamp="1739413216547" textual="false" version="1.0"/>
+</session>

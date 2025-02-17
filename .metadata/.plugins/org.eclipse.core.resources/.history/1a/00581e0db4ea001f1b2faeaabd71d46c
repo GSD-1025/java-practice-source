@@ -1,0 +1,29 @@
+import java.util.Random;
+
+public class practice { 	
+	static Random r= new Random();
+	public static void main(String[] args){
+		String[] k= {"kkk","ddd","sss","www","sss","aaa","ddd"};
+		for(int i=0; i<k.length; i++) {
+			if(k[i].equals("sss")) {
+				for(int j=i; j<k.length; j++) {
+					k[j]=k[j+1];
+				}
+			}
+			break;
+		}
+		
+		
+		
+		
+		
+		for(int i=0; i<7; i++) {
+			System.out.print(k[i]+" ");
+		}
+		
+	}
+	
+
+
+}
+

@@ -1,0 +1,31 @@
+import java.util.Random;
+
+public class practice { 	
+	static Random r= new Random();
+	public static void main(String[] args){
+		dice();
+	
+		
+	}
+	public static int dice() {
+		int dice1 = r.nextInt(6)+1;
+		int dice2 = r.nextInt(6)+1;
+		System.out.println("┏━━━━━━━━━━━━━━━┓");
+		System.out.println("┃   ["+dice1+"]+["+dice2+"]="+(dice1+dice2)+"   ┃");
+		System.out.println("┗━━━━━━━┳┳━━━━━━┛");
+		System.out.println("( \\__/) ┃┃");
+		System.out.println(" (•ㅅ•)핫 ┗┛");
+		System.out.println(" /......づ");
+		if(dice1 == dice2) {
+			System.out.println("주사위 더블!! 한번더");
+			
+		}
+		else 
+			
+		return dice1+dice2;
+	}
+	
+
+
+}
+

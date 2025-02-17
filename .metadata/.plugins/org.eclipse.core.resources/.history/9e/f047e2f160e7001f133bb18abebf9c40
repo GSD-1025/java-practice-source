@@ -1,0 +1,12 @@
+
+public class test02 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		String[] abc = {"aaa","bbb","ccc","ddd","eee"};
+		abc[0]=null;
+		System.out.println(abc[0]);
+
+	}
+
+}
