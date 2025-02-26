@@ -1,9 +1,9 @@
-package buru;
+package marbleGame;
 
 import java.util.Random;
 import java.util.Scanner;
 
-public class Game_final {
+public class Marblegame_v1 {
 	static String map[][][] = new String[13][13][4]; // 맵 정보 저장
 	static int user[][] = new int[4][4]; // 최대 4인용, 4인의 {가진 돈, 유저 index, 유저가 위치한 x좌표, 유저가 위치한 y좌표}
 	static String userLand[][] = new String[user.length][30]; // 유저가 소유한 맵 이름 [유저 index][유저가 소유한 땅 이름]
@@ -39,6 +39,7 @@ public class Game_final {
 					System.out.println("감옥 탈출");
 				}
 			}else if(map[user[p-1][3]][user[p-1][2]][0].equals("우주여행")){ // 우주여행칸 시작 
+				doubleCnt = 0;
 				System.out.println("---------------------------------------------------------------------------------------");
 				System.out.print(p + "번 플레이어 차례\n 우주여행\n");
 				moving(p,distance);
@@ -117,10 +118,13 @@ public class Game_final {
 						if(a.equals("yes")) {
 							System.out.println("거리를 얼만큼 이동하시겠습니까? 최대거리 39 ");
 							distance = 0;
-							while(distance==0 || distance>39 ) {
+							while(distance==0) {
 								distance=in.nextInt();
 								in.nextLine();
-								System.out.println("잘못 입력하셨습니다.\n다시 입력하세요.");
+								if(1>distance || distance>39) {
+									distance = 0;
+									System.out.println("잘못 입력하셨습니다.\n다시 입력하세요.");
+								}
 							}
 							break;
 						}else if(a.equals("no")) {
@@ -133,7 +137,7 @@ public class Game_final {
 				}else if(map[user[p-1][3]][user[p-1][2]][0].equals("출발")) { // 출발지 도착 이벤트 처리
 					System.out.println("-------- 땅 정보------------");
 					System.out.println("출발");
-					System.out.println("출발지 도착 월급 30만원");
+					System.out.println("출발지 도착 월급 20만원");
 				}else { // 일반칸 도착 이벤트 처리
 					if(map[user[p-1][3]][user[p-1][2]][2] != null && map[user[p-1][3]][user[p-1][2]][2].equals(" ")) { // 땅 소유주가 없을경우
 						landInfo(user[p-1][2],user[p-1][3]);
@@ -165,7 +169,7 @@ public class Game_final {
 				System.out.println("현재모인 기부금액: " + donation);
 			}
 			if(user[p-1][0]<0) { // 파산처리
-				System.out.println(p+"님 파산");
+				System.out.println(p + "번플레이어 파산ㅜㅜ");
 				user[p-1][0]=9999999;
 				pcnt++;
 				rest[p-1]=-1;
@@ -188,12 +192,14 @@ public class Game_final {
 		}
 	
 	}
+	
 	public static void landInfo(int x, int y) { // 맵정보 출력
 		System.out.println("-------- 땅 정보------------");
 		System.out.println(map[y][x][0]);
 		System.out.println("토지 가격: " + map[y][x][1]);
 		System.out.println("토지 소유자: " + map[y][x][2]);
-	}	
+	}
+	
 	public static void landBuy(int pNum, int x, int y) { // 땅 구매
 		if(user[pNum-1][0] >= Integer.parseInt(map[y][x][1])) {
 			user[pNum-1][0] -= Integer.parseInt(map[y][x][1]);
@@ -207,8 +213,8 @@ public class Game_final {
 		}else {
 			System.out.println("금액이 부족합니다.");
 		}
-		
 	}
+	
 	public static void tollpay(int p1, int p2, int money) { // 통행료 지불
 		while(true) {
 			if(user[p1-1][0] >= money) {
@@ -220,11 +226,13 @@ public class Game_final {
 				user[p2-1][0] += money;
 				return;
 			}else {
-				System.out.println("금액이 부족합니다.");
+				System.out.println("금액이 " + (money - user[p1-1][0]) + "만큼 부족합니다.");
 				landSell(p1);
 			}
 		}
 	}
+	
+	
 	public static void moving(int pNum, int dice) { // 말 이동
 		if(user[pNum-1][3] == 1) {
 			map[user[pNum-1][3]-1][user[pNum-1][2]][pNum-1] = "0";
@@ -442,7 +450,7 @@ public class Game_final {
 				i++;
 			}
 		}
-		System.out.println(c[0][0]+"		 "+c[0][1]+"      "+c[0][2]+"      "+c[0][3]+"      "+c[0][4]+"      "+c[0][5]+"      "+c[0][6]+"      "+c[0][7]+"      "+c[0][8]+"      "+c[0][9]+"			"+c[0][10]);
+		System.out.println(c[0][0]+"		 "+c[0][1]+"      "+c[0][2]+"      "+c[0][3]+"      "+c[0][4]+"      "+c[0][5]+"      "+c[0][6]+"      "+c[0][7]+"      "+c[0][8]+"      "+c[0][9]+"		"+c[0][10]);
 		System.out.println("	┏━━━━━━┳━━━━━━┳━━━━━━┳━━━━━━┳━━━━━━┳━━━━━━┳━━━━━━┳━━━━━━┳━━━━━━┳━━━━━━┳━━━━━━┓");
 		System.out.println("	┃  기부  ┃  콜롬  ┃      ┃      ┃      ┃      ┃  뉴질  ┃  포르  ┃  에버  ┃  노르  ┃  우주  ┃");
 		System.out.println("	┃      ┃      ┃  기부  ┃  오만  ┃  기부  ┃  부산  ┃      ┃      ┃      ┃      ┃      ┃");
@@ -488,7 +496,7 @@ public class Game_final {
 		System.out.println("	┃  감옥  ┃  터키  ┃  쿠바  ┃  기부  ┃      ┃  경주  ┃  가나  ┃  중국  ┃  기부  ┃  대만  ┃  출발  ┃");
 		System.out.println("	┃      ┃      ┃      ┃      ┃  포르  ┃      ┃      ┃      ┃      ┃      ┃      ┃");
 		System.out.println("	┗━━━━━━┻━━━━━━┻━━━━━━┻━━━━━━┻━━━━━━┻━━━━━━┻━━━━━━┻━━━━━━┻━━━━━━┻━━━━━━┻━━━━━━┛");
-		System.out.println(c[10][0]+"		 "+c[10][1]+"      "+c[10][2]+"      "+c[10][3]+"      "+c[10][4]+"      "+c[10][5]+"      "+c[10][6]+"      "+c[10][7]+"      "+c[10][8]+"      "+c[10][9]+"			"+c[10][10]);
+		System.out.println(c[10][0]+"		 "+c[10][1]+"      "+c[10][2]+"      "+c[10][3]+"      "+c[10][4]+"      "+c[10][5]+"      "+c[10][6]+"      "+c[10][7]+"      "+c[10][8]+"      "+c[10][9]+"		"+c[10][10]);
 	}
 	
 	public static int userSeting() { // 유저 초기값 세팅
@@ -550,7 +558,9 @@ public class Game_final {
 			}
 		}
 	}
+	
 	public static void landSell(int pNum) { // 땅 판매
+		System.out.print("현재 " + pNum + "님이 보유중인 땅: ");
 		for(int i=0; userLand[pNum-1][i] != null; i++) {
 			System.out.print(userLand[pNum-1][i]+" ");
 		}
