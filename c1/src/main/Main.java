@@ -1,5 +1,6 @@
 package main;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -22,7 +23,7 @@ public class Main {
 			case 2: //수리 관리
 				System.out.println("수리할 자동차 번호를 입력");
 				String carnum=in.nextLine();
-				carOne[] list = carm.getCarlist();
+				ArrayList<carOne> list = carm.getCarlist();
 				//확장된 for
 				for(carOne c: list) { //list를 0번 인덱스부터 순회하면서 value를 변수 c에 저장한다.
 					if(c!=null) {

@@ -1,15 +1,16 @@
 package main;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class CarM {
 	//자동차 관리
 	//carOne 객체를 등록하고 조회하는 책임
-	private carOne[] carlist= new carOne[5]; 
+	private ArrayList<carOne> carlist= new  ArrayList<carOne>();
 	
 	
-	public carOne[] getCarlist() {
-		return carlist;
+	public ArrayList<carOne> getCarlist() {
+		return this.carlist;
 	}
 
 	public void menu() {
@@ -39,21 +40,23 @@ public class CarM {
 		String name=in.nextLine();
 		carOne carone= new carOne();
 		carone.setNum(num);
-		carone.setNaem(name);
-		for(int i=0; i<carlist.length; i++) {
+		carone.setName(name);
+		/*for(int i=0; i<carlist.length; i++) {
 			if(carlist[i]==null) {
 				carlist[i]=carone;
 				break;
 			}
-		}
+		}*/
+		carlist.add(carone);
+		
 		
 		
 	}
 	
 	public void listcar() {
-		for(int i=0; i<carlist.length; i++) {
-			if(carlist[i]!=null) {
-				carlist[i].prt();
+		for(int i=0; i<carlist.size(); i++) {
+			if(carlist.get(i)!=null) {
+				carlist.get(i).prt();
 			}
 		}
 	}

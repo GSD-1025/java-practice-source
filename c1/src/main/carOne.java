@@ -1,5 +1,6 @@
 package main;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class carOne {
@@ -7,7 +8,7 @@ public class carOne {
 	private String num=null;
 	private String name=null;
 	//수리 내역을 저장할 책임 > 수리내역은 여러개 이므로 배열로
-	private RepairOne[] repairlist =new RepairOne[5];
+	private ArrayList<RepairOne> repairlist= new ArrayList<RepairOne>();
 	
 	public void menu() {
 		Scanner in=new Scanner(System.in);
@@ -31,9 +32,9 @@ public class carOne {
 
 	}
 	private void listrepair() {
-		for(int i=0; i<repairlist.length; i++) {
-			if(repairlist[i]!=null) {
-				repairlist[i].prt();
+		for(int i=0; i<repairlist.size(); i++) {
+			if(repairlist.get(i)!=null) {
+				repairlist.get(i).prt();
 			}
 		}
 		
@@ -46,35 +47,27 @@ public class carOne {
 		RepairOne repair= new RepairOne();
 		repair.setDate(date);
 		repair.setMemo(memo);
-		for(int i=0; i<repairlist.length; i++) {
+		/*for(int i=0; i<repairlist.length; i++) {
 			if(repairlist[i]==null) {
 				repairlist[i]=repair;
 				break;
 			}
-		}
+		}*/
+		repairlist.add(repair);
 		
-	}
-	public String getNum() {
-		return num;
 	}
 
 	public void setNum(String num) {
 		this.num = num;
 	}
 
-	public String getNaem() {
-		return name;
-	}
 
-	public void setNaem(String naem) {
+	public void setName(String naem) {
 		this.name = naem;
 	}
 
-	public RepairOne[] getRepairlist() {
-		return repairlist;
-	}
 
-	public void setRepairlist(RepairOne[] repairlist) {
+	public void setRepairlist(ArrayList<RepairOne> repairlist) {
 		this.repairlist = repairlist;
 	}
 	
@@ -84,6 +77,10 @@ public class carOne {
 		System.out.println("-----------수리내역");
 		listrepair();
 	}
+	public String getNum() {
+		return num;
+	}
+	
 
 	
 	
