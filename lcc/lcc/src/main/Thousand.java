@@ -93,14 +93,6 @@ public class Thousand {
 		insert();
 	}
 	
-	public ArrayList<Character> getCheonja() {
-		return cheonja;
-	}
-
-	public ArrayList<Character> getCheonjayin() {
-		return cheonjayin;
-	}
-
 	public void insert() {
 		for(int i=0; i<cheonex.length(); i++) {
 			if(cheonex.charAt(i)!=' ') {
@@ -179,12 +171,14 @@ public class Thousand {
 					if(j==0) {
 						System.out.print(cheonja.get(8*b+i));
 						if(i==3) {
-							System.out.print("  ");
+							System.out.print(" ");
+							System.out.println("\t");
 						}
 					}else {
 						System.out.print(cheonjayin.get(8*b+i));
 						if(i==3) {
 							System.out.print(" ");
+							System.out.println("\t");
 						}
 					}
 				}
@@ -224,12 +218,12 @@ public class Thousand {
 			for(int i=0; i<10; i++) {
 				System.out.println((i+1)+"번째  입력");
 				String mean=in.nextLine();
-				wordmean.putIfAbsent(cheonja.get(a.get(i))+" "+cheonjayin.get(a.get(i)), mean);
+				wordmean.put(cheonja.get(a.get(i))+" "+cheonjayin.get(a.get(i)), mean);
 			}
 		}else if(b==2) {
 			System.out.println("뜻을 입력하세요");
 			String mean=in.nextLine();
-			sentmean.putIfAbsent(sentword+" "+sentyin, mean);
+			sentmean.put(sentword+" "+sentyin, mean);
 		}
 		
 		
@@ -278,5 +272,10 @@ public class Thousand {
 			System.out.println("해당 단어나 문장이 없음");
 		}
 	}
-
+	public ArrayList<Character> getCheonja(){
+		return cheonja;
+	}
+	public ArrayList<Character> getCheonjayin(){
+		return cheonjayin;
+	}
 }

@@ -16,23 +16,17 @@ public class ChainaM {
 			String num = s.nextLine();
 			switch(num) {
 				case "1": 
-					boolean flag2 = true;
-					while(flag2) {
-						System.out.println("1. 문장 보기  2. 단어 보기  3. 전체 보기");
-						String num2 = s.nextLine();
-						switch(num2) {
-						case "1":
-							cheon.sentprt(0); 
-							break;
-						case "2":
-							cheon.wordprt(0);
-							break;
-						case "3":
-							cheon.prt();
-							break;
-						default:
-							flag2=false;
-						}
+					System.out.println("1. 문장 보기  2. 단어 보기  3. 전체 보기");
+					String num2 = s.nextLine();
+					switch(num2) {
+					case "1":
+						cheon.sentprt(0); 
+						break;
+					case "2":
+						cheon.wordprt(0);
+						break;
+					case "3":
+						cheon.prt();
 					}
 					break;
 				case "2": 
@@ -120,7 +114,6 @@ public class ChainaM {
 			}
 		}
 	}
-
 	public Thousand getCheon() {
 		return cheon;
 	}
