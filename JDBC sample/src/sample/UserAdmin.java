@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 //책임: 회원을 관리
 public class UserAdmin {
-	private UserDAO userdao= new UserDAO();
+	private UserDAO userdao= UserDAO.getInstance();
 	UserAdmin(){
 		Scanner in= new Scanner(System.in);
 		boolean f= true;
