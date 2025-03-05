@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 public class BookDAO {
 	private String driver="oracle.jdbc.driver.OracleDriver";
@@ -26,27 +28,25 @@ public class BookDAO {
 			Connection conn=DriverManager.getConnection(url,"system","1111");
 			System.out.println("연결성공");
 			String sq1="insert into booklist values(?,?,?)";
-			System.out.println("1");
-			PreparedStatement stmt=conn.prepareStatement(sq1);
-			System.out.println("2");
-			stmt.setString(1, b.getName());
-			System.out.println("3");
+			PreparedStatement stmt=conn.prepareStatement(sq1);			
+			stmt.setString(1, b.getName());			
 			stmt.setString(2, b.getBname());
-			System.out.println("3");
 			stmt.setString(3, b.getBdate());
-			System.out.println("3");
 			int result=stmt.executeUpdate();
-			System.out.println("3");
-			String sq2="update libuser set book=book+1 where name=?";
-			System.out.println("3");
-			PreparedStatement stmt2=conn.prepareStatement(sq2);
-			System.out.println("3");
-			stmt2.setString(1, b.getName());
-			System.out.println("3");
-			int result2=stmt2.executeUpdate();
-			System.out.println("3");
 			System.out.println(result+"건 삽입");
-			System.out.println(result2+"건 삽입");
+			stmt.close();
+			conn.close();
+		} catch (Exception e) {
+			
+		}
+		try {
+			Connection conn=DriverManager.getConnection(url,"system","1111");
+			System.out.println("연결성공");
+			String sq1="update libuser set point=point+1 where name=?";
+			PreparedStatement stmt=conn.prepareStatement(sq1);			
+			stmt.setString(1, b.getName());			
+			int result=stmt.executeUpdate();
+			System.out.println(result+"건 수정");
 			stmt.close();
 			conn.close();
 		} catch (Exception e) {
@@ -54,45 +54,57 @@ public class BookDAO {
 		}
 	}
 	
-	public void delete(String bname) {
+	public void delete(String bname, String name) {
 		try {
 			Connection conn=DriverManager.getConnection(url,"system","1111");
 			System.out.println("연결성공");
 			String sq1="delete from booklist where bname=?";
 			PreparedStatement stmt=conn.prepareStatement(sq1);
 			stmt.setString(1, bname);
-			String sq2="update libuser set book=book-1 where name=?";
-			PreparedStatement stmt2=conn.prepareStatement(sq2);
-			stmt2.setString(1,selectname(bname));
 			int result=stmt.executeUpdate();
-			int result2=stmt2.executeUpdate();
 			System.out.println(result+"건 삭제");
-			System.out.println(result2+"건 삭제");
 			stmt.close();
 			conn.close();
 		} catch (Exception e) {
 			
 		}
-		
-	}
-	
-	private String selectname(String bname) {
-		String name=null;
 		try {
 			Connection conn=DriverManager.getConnection(url,"system","1111");
 			System.out.println("연결성공");
-			String sq1="select name from booklist where bname=?";
-			PreparedStatement stmt=conn.prepareStatement(sq1);
-			stmt.setString(1, bname);
-			stmt.executeUpdate();
-			ResultSet rs=stmt.executeQuery(sq1);
-			name=rs.getString("name");
-			
+			String sq1="update libuser set point=point-1 where name=?";
+			PreparedStatement stmt=conn.prepareStatement(sq1);			
+			stmt.setString(1,name);
+			int result=stmt.executeUpdate();
+			System.out.println(result+"건 수정");
+			stmt.close();
+			conn.close();
 		} catch (Exception e) {
-			
+			// TODO: handle exception
 		}
-		System.out.println(name);
-		return name;
+		
+	}
+
+	public ArrayList<BookDTO> selectall(){
+		ArrayList<BookDTO> list=new ArrayList<>();
+		try {
+			Connection conn=DriverManager.getConnection(url,"system","1111");
+			System.out.println("연결성공");
+			String sq1="select * from booklist";
+			Statement stmt=conn.createStatement();
+			ResultSet rs=stmt.executeQuery(sq1);
+			while(rs.next()) {
+				BookDTO b= new BookDTO();
+				b.setName(rs.getString("name"));
+				b.setBname(rs.getString("bname"));
+				b.setBdate(rs.getString("bdate"));
+				list.add(b);
+			}
+			stmt.close();
+			conn.close();
+		} catch (Exception e) {
+
+		}
+		return list;
 	}
 	
 	

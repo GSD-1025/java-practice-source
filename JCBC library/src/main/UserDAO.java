@@ -84,7 +84,7 @@ public class UserDAO {
 
 	public void delete(String name) {
 		try {
-			Connection conn=DriverManager.getConnection(url,"system","1111");
+			Connection conn= connect() ;
 			System.out.println("연결성공");
 			String sq1="delete from libuser where name=?";
 			PreparedStatement stmt=conn.prepareStatement(sq1);

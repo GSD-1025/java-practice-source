@@ -1,5 +1,6 @@
 package main;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BookM {
@@ -22,6 +23,9 @@ public class BookM {
 			case 2:
 				handin();
 				break;
+			case 3:
+				list();
+				break;
 			default:
 				f=false;
 				break;
@@ -31,11 +35,22 @@ public class BookM {
 
 	
 	
+	private void list() {
+		ArrayList<BookDTO> blist=bdao.selectall();
+		for(BookDTO b: blist) {
+			b.prt();
+			System.out.println();
+		}
+		
+	}
+
 	private void handin() {
 		Scanner in= new Scanner(System.in);
 		System.out.println("반납하는 책제목 입력");
 		String bname=in.nextLine();
-		bdao.delete(bname);
+		System.out.println("반납하는 사람 이름 입력");
+		String name=in.nextLine();
+		bdao.delete(bname,name);
 	}
 
 	private void barrow() {

@@ -22,5 +22,11 @@ public class BookDTO {
 	public void setBdate(String bdate) {
 		this.bdate = bdate;
 	}
+	
+	public void prt() {
+		System.out.println("name: "+this.name);
+		System.out.println("book name: "+this.bname);
+		System.out.println("date: "+this.bdate);
+	}
 
 }
