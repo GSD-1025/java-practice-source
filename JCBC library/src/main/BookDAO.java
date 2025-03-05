@@ -37,21 +37,20 @@ public class BookDAO {
 			stmt.close();
 			conn.close();
 		} catch (Exception e) {
-			
 		}
+		
 		try {
 			Connection conn=DriverManager.getConnection(url,"system","1111");
 			System.out.println("연결성공");
-			String sq1="update libuser set point=point+1 where name=?";
+			String sq1="update libuser set book=book+1 where name=?";
 			PreparedStatement stmt=conn.prepareStatement(sq1);			
 			stmt.setString(1, b.getName());			
-			int result=stmt.executeUpdate();
-			System.out.println(result+"건 수정");
+			stmt.executeUpdate();
 			stmt.close();
 			conn.close();
 		} catch (Exception e) {
-			
 		}
+		
 	}
 	
 	public void delete(String bname, String name) {
@@ -71,11 +70,10 @@ public class BookDAO {
 		try {
 			Connection conn=DriverManager.getConnection(url,"system","1111");
 			System.out.println("연결성공");
-			String sq1="update libuser set point=point-1 where name=?";
+			String sq1="update libuser set book=book-1 where name=?";
 			PreparedStatement stmt=conn.prepareStatement(sq1);			
 			stmt.setString(1,name);
-			int result=stmt.executeUpdate();
-			System.out.println(result+"건 수정");
+			stmt.executeUpdate();
 			stmt.close();
 			conn.close();
 		} catch (Exception e) {
