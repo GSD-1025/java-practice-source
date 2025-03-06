@@ -49,6 +49,24 @@ public class ItemDAO {
 		return conn;
 	}
 	
+	public String nid() {
+		String num=null;
+		Statement stmt=null;
+		try {
+			if(getConnection()!=null) {
+				String sq1="select sq1.nextval from dual";
+				stmt=conn.createStatement();
+				ResultSet rs=stmt.executeQuery(sq1);
+				while(rs.next()) {
+					num=rs.getString("nextval");
+				}
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return num;
+	}
+	
 	public void insert2(ItemDTO i) {
 		PreparedStatement stmt=null;
 		try {
@@ -132,6 +150,8 @@ public class ItemDAO {
 				int re=stmt.executeUpdate();
 				if(re==1) {
 					System.out.println("전송 성공");
+				}else {
+					System.out.println("대상 없음");
 				}
 			}else if(getConnection()!=null&&a==2) {
 				String sq1="update item set amount=? where iname=?";
@@ -141,6 +161,8 @@ public class ItemDAO {
 				int re=stmt.executeUpdate();
 				if(re==1) {
 					System.out.println("전송 성공");
+				}else {
+					System.out.println("대상 없음");
 				}
 			}
 			stmt.close();
@@ -161,6 +183,8 @@ public class ItemDAO {
 				int re=stmt.executeUpdate();
 				if(re==1) {
 					System.out.println("전송 성공");
+				}else {
+					System.out.println("대상 없음");
 				}
 			}else if(getConnection()!=null&&a==4) {
 				String sq1="update item set inform=? where iname=?";
@@ -170,6 +194,8 @@ public class ItemDAO {
 				int re=stmt.executeUpdate();
 				if(re==1) {
 					System.out.println("전송 성공");
+				}else {
+					System.out.println("대상 없음");
 				}
 			}
 			stmt.close();
@@ -179,11 +205,30 @@ public class ItemDAO {
 		}
 	}
 
+	
 	public void delete(String iname) {
 		PreparedStatement stmt=null;
 		try {
 			if(getConnection()!=null) {
 				String sq1="delete from item where iname=?";
+				stmt=conn.prepareStatement(sq1);
+				stmt.setString(1, iname);
+				int re=stmt.executeUpdate();
+				if(re==1) {
+					System.out.println("전송 성공");
+				}else {
+					System.out.println("대상 없음");
+				}
+			}
+			stmt.close();
+			conn.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		try {
+			if(getConnection()!=null) {
+				String sq1="delete from itype where iname=?";
 				stmt=conn.prepareStatement(sq1);
 				stmt.setString(1, iname);
 				int re=stmt.executeUpdate();
@@ -197,6 +242,7 @@ public class ItemDAO {
 			// TODO: handle exception
 		}
 	}
+	
 	
 	public ArrayList<ItemDTO> selectall(){
 		ArrayList<ItemDTO> list=new ArrayList<>();
@@ -231,7 +277,7 @@ public class ItemDAO {
 			}
 			
 		} catch (Exception e) {
-			// TODO: handle exception
+			
 		}
 		return list;
 		
@@ -274,7 +320,7 @@ public class ItemDAO {
 			}
 			
 		} catch (Exception e) {
-			// TODO: handle exception
+			
 		}
 		return list;
 	}

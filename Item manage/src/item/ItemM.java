@@ -15,7 +15,7 @@ public class ItemM {
 		Scanner in=new Scanner(System.in);
 		boolean f=true;
 		while(f) {
-			System.out.println("1. 등록  2. 수정  3. 삭제  4. 보기");
+			System.out.println("1. 등록  2. 수정  3. 삭제  4. 보기  else:종료");
 			int a=in.nextInt();
 			in.nextLine();
 			switch(a) {
@@ -54,16 +54,18 @@ public class ItemM {
 		System.out.println("검색하고 싶은 제폼명을 입력하시오");
 		String snt=in.nextLine();
 		ArrayList<ItemDTO> itlist=idao.select(snt);
+		if(itlist.size()==0)
+			System.out.println("검색대상이 없음");
 		for(ItemDTO i:itlist) {
 			i.prt();
 			System.out.println();
 		}
-		
-		
 	}
 
 	private void all() {
 		ArrayList<ItemDTO> itlist=idao.selectall();
+		if(itlist.size()==0)
+			System.out.println("검색대상이 없음");
 		for(ItemDTO i:itlist) {
 			i.prt();
 			System.out.println();
@@ -106,6 +108,15 @@ public class ItemM {
 		in.nextLine();
 		System.out.println("종류 abcd만 입력해줘");
 		String itype=in.nextLine();
+		boolean itf=true;
+		while(itf) {
+			if(!itype.equals("a")&&!itype.equals("b")&&!itype.equals("c")&&!itype.equals("d")) {
+				System.out.println("다시 입력하세요");
+				itype=in.nextLine();
+			}else {
+				itf=false;
+			}
+		}
 		System.out.println("수량");
 		int amount=in.nextInt();
 		in.nextLine();
@@ -114,6 +125,8 @@ public class ItemM {
 		System.out.println("정보");
 		String inform=in.nextLine();
 		ItemDTO item=new ItemDTO();
+		String nid=item.getNid()+idao.nid();
+		System.out.println("등록 아이디 :"+nid);
 		item.setIname(iname);
 		item.setPrice(price);
 		item.setItype(itype);

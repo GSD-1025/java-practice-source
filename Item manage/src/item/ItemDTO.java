@@ -10,8 +10,12 @@ public class ItemDTO {
 	private String idate;
 	private String inform;
 	
+	private static final String nid="hm";
 	
 	
+	public static String getNid() {
+		return nid;
+	}
 	public String getInform() {
 		return inform;
 	}
@@ -66,8 +70,8 @@ public class ItemDTO {
 		System.out.print(this.price+"원  ");
 		System.out.print(this.amount+"개   ");
 		System.out.println("  "+this.itype);
-		System.out.print(this.chman+"   ");
-		System.out.println(this.idate+" ");
-		System.out.println(this.inform);
+		System.out.print("담당자 :"+this.chman);
+		System.out.println("    "+this.idate+" ");
+		System.out.println("정보 :"+this.inform);
 	}
 }
