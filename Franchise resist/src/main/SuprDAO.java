@@ -110,13 +110,10 @@ public class SuprDAO {
 	
 	public ArrayList<Franchise> selectall() {
 		ArrayList<Franchise> list= new ArrayList<Franchise>();
+		System.out.println("시도");
 		try {
-			String sq1="select * " + 
-					"from chicken " + 
-					"inner join pizza " + 
-					"on c.mname=p.mname " + 
-					"inner join burger " + 
-					"on c.mname=p.mname";
+			getConnection();
+			String sq1="select * from chicken c full join pizza p on c.mname=p.mname full join burger b on c.mname=b.mname";
 			Statement stmt=conn.createStatement();
 			ResultSet rs=stmt.executeQuery(sq1);
 			while(rs.next()) {
@@ -127,13 +124,16 @@ public class SuprDAO {
 					ft.setType(rs.getString("ctype"));
 					ft.setchick(rs.getInt("csize"), rs.getString("cooking"));
 					ft.setRecostar(rs.getInt("recostar"));
-				}else if(rs.getString("ptype")!=null) {
+					list.add(ft);
+				}else if(rs.getString("ptype").equals("pizza")) {
 					Franchise ft= new PizzaDTO();
 					ft.setFname(rs.getString("fname_1"));
+					System.out.println(rs.getString("fname_1"));
 					ft.setMname(rs.getString("mname_1"));
 					ft.setType(rs.getString("ptype"));
 					ft.setpizz(rs.getString("psize"), rs.getString("topping"));
 					ft.setRecostar(rs.getInt("recostar_1"));
+					list.add(ft);
 				}else if(rs.getString("btype")!=null) {
 					Franchise ft= new BurgerDTO();
 					ft.setFname(rs.getString("fname_2"));
@@ -141,8 +141,8 @@ public class SuprDAO {
 					ft.setType(rs.getString("btype"));
 					ft.setburg(rs.getString("petty"),rs.getString("bun"), rs.getString("drink"));
 					ft.setRecostar(rs.getInt("recostar_2"));
+					list.add(ft);
 				}
-				list.add(ft);
 			}
 			rs.close();
 			stmt.close();

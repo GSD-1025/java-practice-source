@@ -13,7 +13,6 @@ public class Franchise {
 		
 	}
 	public void setpizz(String topping,String psize) {
-		System.out.println("이게 실행됨");
 	}
 	public void setburg(String petty, String bun, String drink) {
 		
