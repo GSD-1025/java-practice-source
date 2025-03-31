@@ -28,7 +28,6 @@ public class Admin {
 		}
 	}
 	
-	
 
 	private void viewlist() {
 		for(Super s: ss) {

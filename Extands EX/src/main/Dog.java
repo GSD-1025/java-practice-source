@@ -25,6 +25,7 @@ public class Dog extends Super{
 		System.out.println("개밥");
 	}
 	private void beforeeat() {
+		System.out.println(username);
 		System.out.println("밥 먹기전에 세수");
 	}
 	

@@ -1,6 +1,15 @@
 package item;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
+@Data
+
 public class ItemDTO {
+	
+	
+	
 	private String id;
 	private String iname;
 	private int price;
@@ -9,61 +18,13 @@ public class ItemDTO {
 	private String chman;
 	private String idate;
 	private String inform;
-	
 	private static final String nid="hm";
-	
 	
 	public static String getNid() {
 		return nid;
 	}
-	public String getInform() {
-		return inform;
-	}
-	public void setInform(String inform) {
-		this.inform = inform;
-	}
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public String getIname() {
-		return iname;
-	}
-	public void setIname(String iname) {
-		this.iname = iname;
-	}
-	public int getPrice() {
-		return price;
-	}
-	public void setPrice(int price) {
-		this.price = price;
-	}
-	public String getItype() {
-		return itype;
-	}
-	public void setItype(String itype) {
-		this.itype = itype;
-	}
-	public int getAmount() {
-		return amount;
-	}
-	public void setAmount(int amount) {
-		this.amount = amount;
-	}
-	public String getChman() {
-		return chman;
-	}
-	public void setChman(String chman) {
-		this.chman = chman;
-	}
-	public String getIdate() {
-		return idate;
-	}
-	public void setIdate(String idate) {
-		this.idate = idate;
-	}
+	
+	
 	public void prt() {
 		System.out.print(this.id+" ");
 		System.out.print(this.iname+" ");
