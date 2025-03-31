@@ -33,6 +33,7 @@ public class Study {
 				break;
 			default:
 				flag=false;
+				3.
 			}
 		}
 	}

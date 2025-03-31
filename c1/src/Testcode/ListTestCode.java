@@ -8,10 +8,11 @@ public class ListTestCode {
 		// List test용
 		
 		ArrayList<String> a= new ArrayList<String>();
+		ArrayList<String> b= new ArrayList<String>();
 		//추가하는 방법
 		String name="kim";
 		a.add(name);
-		System.out.println("사이즈 : "+a.size());
+		System.out.println("사이즈 : "+b.size());
 		a.add(name);
 		System.out.println("사이즈 : "+a.size());
 		

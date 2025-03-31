@@ -11,7 +11,7 @@ public class Postfix {
 		Stack<String> op=new Stack<>();
 		Stack<String> fnum=new Stack<>();
 		Stack<String> fop=new Stack<>();
-		String a="2+3*4/(2-3)+10";
+		String a="2+10+14-5*(60-20)-20";
 		String[] o= {"+","-","*","/","(",")"};
 		StringTokenizer st=new StringTokenizer(a,"()+/*-",true);
 		StringTokenizer st1=new StringTokenizer(a,"()+/*-");
@@ -95,19 +95,20 @@ public class Postfix {
 		System.out.println(op);
 		int sum=0;
 		int cnt=0;
-		for(int i=0; i<fop.size(); i++) {
+		for(int i=0; i<fnum.size(); i++) {
 			if(i==0) {
-				sum=Integer.parseInt(fop.pop());
+				sum=Integer.parseInt(fnum.pop());
+				System.out.println(sum);
 			}else {
 				String q=op.pop();
 				if(q.equals("+")) {
-					sum+=Integer.parseInt(fop.pop());
+					sum+=Integer.parseInt(fnum.pop());
 				}else if(q.equals("-")) {
-					sum-=Integer.parseInt(fop.pop());
+					sum-=Integer.parseInt(fnum.pop());
 				}else if(q.equals("/")) {
-					sum/=Integer.parseInt(fop.pop());
+					sum/=Integer.parseInt(fnum.pop());
 				}else if(q.equals("*")) {
-					sum*=Integer.parseInt(fop.pop());
+					sum*=Integer.parseInt(fnum.pop());
 				}
 			}
 		}

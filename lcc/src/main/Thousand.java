@@ -114,6 +114,7 @@ public class Thousand {
 		}
 
 	}
+	
 	public void prt() {
 		Scanner in=new Scanner(System.in);
 		System.out.println("전체보기는 40개씩 끊어서 나옵니다");
